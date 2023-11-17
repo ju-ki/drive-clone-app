@@ -1,5 +1,5 @@
 export interface Button {
-    btnClass:string;
+    btnClass?:string;
     title:string;
     onClick?: (event: React.FormEvent) => void;
 }
