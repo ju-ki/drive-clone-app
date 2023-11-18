@@ -1,5 +1,10 @@
 import Head from "next/head";
 import HomeComponent from "@/components/Home";
+import {app, storage, database} from "@/firebaseConfig";
+
+console.log(app);
+
+
 
 export default function Home() {
 
