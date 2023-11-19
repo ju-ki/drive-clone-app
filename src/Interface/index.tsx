@@ -4,7 +4,15 @@ export interface Button {
     onClick?: (event: React.FormEvent) => void;
 }
 
+export interface Progress {
+    progress:number
+}
+
 export interface GithubAuth {
     clientId:string;
     clientSecret:string;
+}
+
+export interface ArrayType {
+    map:Function
 }

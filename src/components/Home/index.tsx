@@ -1,6 +1,7 @@
 import { useFetchSession } from "@/hooks/useSession";
 import TopbarComponent from "@/components/Topbar";
 import UploadFiles from "@/components/UploadFiles";
+import ShowFiles from "../ShowFiles";
 
 export default function HomeComponent() {
     const {session} = useFetchSession()
@@ -10,6 +11,7 @@ export default function HomeComponent() {
     <div>
       <TopbarComponent/>
       <UploadFiles/>
+      <ShowFiles/>
     </div>
   )
 }
