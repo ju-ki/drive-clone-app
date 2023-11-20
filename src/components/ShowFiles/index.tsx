@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./ShowFiles.module.scss";
 import { fetchFiles } from '@/hooks/fetchFiles';
 import { FaFileAlt } from "react-icons/fa";
+import { FaFolder } from "react-icons/fa";
 
 export default function ShowFiles() {
     let {fileList} = fetchFiles();
@@ -13,14 +14,22 @@ export default function ShowFiles() {
 
   return (
     <div className={styles.filesGrid}>
-        {fileList.map((file :{imageLink:""; imageName:""}) => {
+        {fileList.map((file :{id:0;imageLink:""; imageName:"";isFolder:false}) => {
         return (
             <div key={file.id}>
 
                 <div className={`${styles.files} bg-accent`}>
-                    <FaFileAlt size={80} onClick={() => openFile(file.imageLink)} />
-                    <p>{file.imageName}</p>
-                    {/* <img className={styles.imageLink} src={file.imageLink} /> */}
+                    {file.isFolder ? 
+                        <>
+                            <FaFolder size={80} />
+                            <p>{file.folderName}</p>
+                        </> :
+                        <>
+                            {/* <FaFileAlt size={80} onClick={() => openFile(file.imageLink)} /> */}
+                            <img className={styles.imageLink} src={file.imageLink} />
+                            <p>{file.imageName}</p>
+                        </>
+                    }
                 </div>
             </div>
         )

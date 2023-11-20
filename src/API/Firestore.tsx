@@ -7,7 +7,25 @@ export const addFiles = (imageLink:string, imageName:string) => {
     try {
         void addDoc(files, {
             imageLink: imageLink,
-            imageName: imageName
+            imageName: imageName,
+            isFolder:false
+        });
+    } catch(err){
+        console.log(err);
+    }
+}
+
+
+export const addFolder = (payload:{
+    folderName:string,
+    isFolder:boolean,
+    fileList:object
+}) => {
+    try {
+        void addDoc(files, {
+            folderName:payload.folderName,
+            isFolder:payload.isFolder,
+            fileList:payload.fileList
         });
     } catch(err){
         console.log(err);
