@@ -6,7 +6,7 @@ import ProgressComp from '../common/Progress';
 import { addFolder } from '@/API/Firestore';
 
 
-export default function UploadFiles() {
+export default function UploadFiles({parentId}) {
   const [isFileVisible, setFileVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isFolderVisible, setFolderVisible] = useState(false);
@@ -22,7 +22,8 @@ export default function UploadFiles() {
     let payload = {
       folderName:folderName,
       isFolder:true,
-      fileList:[]
+      fileList:[],
+      parentId:parentId || "",
     }
 
     addFolder(payload);

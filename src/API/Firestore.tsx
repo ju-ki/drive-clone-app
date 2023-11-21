@@ -19,13 +19,15 @@ export const addFiles = (imageLink:string, imageName:string) => {
 export const addFolder = (payload:{
     folderName:string,
     isFolder:boolean,
-    fileList:object
+    fileList:object,
+    parentId:string
 }) => {
     try {
         void addDoc(files, {
             folderName:payload.folderName,
             isFolder:payload.isFolder,
-            fileList:payload.fileList
+            fileList:payload.fileList,
+            parentId:payload.parentId
         });
     } catch(err){
         console.log(err);

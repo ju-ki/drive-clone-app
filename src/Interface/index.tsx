@@ -16,3 +16,8 @@ export interface GithubAuth {
 export interface ArrayType {
     map:Function
 }
+
+export interface FileType {
+    id:string;
+    parentId:string;
+}
