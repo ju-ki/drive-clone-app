@@ -9,7 +9,9 @@ export default function HomeComponent() {
     
   return (
     <div>
+      
       <TopbarComponent/>
+      {/* ここが原因ぽい */}
       <UploadFiles parentId="" />
       <ShowFiles parentId="" />
     </div>

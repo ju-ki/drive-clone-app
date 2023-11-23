@@ -2,8 +2,9 @@
 import { storage } from "@/firebaseConfig";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import { addFiles } from "./Firestore";
+import type { FileType } from "@/Interface";
 
-export const fileUpload = (file: any, setProgress: Function) => {
+export const fileUpload = (file: FileType, setProgress: (progress: number) => void, parentId:string) => {
     
     const storageRef = ref(storage, `file/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -20,7 +21,7 @@ export const fileUpload = (file: any, setProgress: Function) => {
         },
         () => {
             void getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                addFiles(downloadURL, file.name);
+                addFiles(downloadURL, file.name, parentId);
             });
         }
     )

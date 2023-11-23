@@ -6,20 +6,18 @@ import ProgressComp from '../common/Progress';
 import { addFolder } from '@/API/Firestore';
 
 
-export default function UploadFiles({parentId}) {
+export default function UploadFiles({parentId}:string) {
   const [isFileVisible, setFileVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isFolderVisible, setFolderVisible] = useState(false);
   const [folderName, setFolderName] = useState("");
-  const [file, setFile] = useState({});
   const uploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    let file = event.target.files?.[0];
-    fileUpload(file, setProgress);
+    const file = event.target.files?.[0];
+    fileUpload(file, setProgress, parentId);
   };
 
-  const uploadFolder = () => {
-    console.log("clicked");
-    let payload = {
+  const uploadFolder = (parentId:string) => {
+    const payload = {
       folderName:folderName,
       isFolder:true,
       fileList:[],
@@ -47,7 +45,7 @@ export default function UploadFiles({parentId}) {
       {isFolderVisible ? (
         <>
           <input type="text" value={folderName} onChange={(event) => setFolderName(event.target.value)} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-          <Button onClick={() => uploadFolder()} title='Create' btnClass='btn-primary btn-success'/>
+          <Button onClick={() => uploadFolder(parentId)} title='Create' btnClass='btn-primary btn-success'/>
         </>
 
       ) : <></>}

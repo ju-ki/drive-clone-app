@@ -6,7 +6,13 @@ import { FaFolder } from "react-icons/fa";
 import { useRouter } from 'next/router';
 
 export default function ShowFiles({parentId}:{parentId:string}) {
+    console.log("aaa");
+    
+    console.log(parentId);
+    
     const {fileList} = FetchFiles(parentId);
+    console.log(fileList);
+    
     const router = useRouter();
     const openFile = (fileLink:string) => {
         console.log("aa");

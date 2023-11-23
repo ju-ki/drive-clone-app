@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 const files = collection(database, "files");
 
-export const FetchFiles = (parentId:string) => {
+export const FetchFiles = (parentId: string) => {
     const [fileList, setFileList] = useState<ArrayType>([]);
-
+    
     const getFolders = () => {
-        if(!parentId)
+        if(parentId == null)
         {
             onSnapshot(files, (response) => {
                 console.log("response");
@@ -35,7 +35,7 @@ export const FetchFiles = (parentId:string) => {
 
     useEffect(() => {
         getFolders()
-    }, []);
+    }, [parentId]);
 
     return {fileList};
 }
