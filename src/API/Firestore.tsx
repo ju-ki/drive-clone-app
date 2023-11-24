@@ -3,13 +3,14 @@ import { collection, addDoc } from "firebase/firestore"
 
 const files = collection(database, "files");
 
-export const addFiles = (imageLink:string, imageName:string, parentId:string) => {
+export const addFiles = (imageLink:string, imageName:string, parentId:string, userEmail:string) => {
     try {
         void addDoc(files, {
             imageLink: imageLink,
             imageName: imageName,
             isFolder:false,
-            parentId:parentId
+            parentId:parentId,
+            userEmail:userEmail
         });
     } catch(err){
         console.log(err);
@@ -21,14 +22,16 @@ export const addFolder = (payload:{
     folderName:string,
     isFolder:boolean,
     fileList:object,
-    parentId:string
+    parentId:string,
+    userEmail:string
 }) => {
     try {
         void addDoc(files, {
             folderName:payload.folderName,
             isFolder:payload.isFolder,
             fileList:payload.fileList,
-            parentId:payload.parentId
+            parentId:payload.parentId,
+            userEmail:payload.userEmail
         });
     } catch(err){
         console.log(err);

@@ -21,3 +21,8 @@ export interface FileType {
     id:string;
     parentId:string;
 }
+
+
+export interface FolderStructure {
+    parentId: string;
+}

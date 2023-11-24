@@ -4,16 +4,20 @@ import Button from '../common/Button/Button';
 import { fileUpload } from '@/API/FileUpload';
 import ProgressComp from '../common/Progress';
 import { addFolder } from '@/API/Firestore';
+import type { FolderStructure } from '@/Interface';
+import { useFetchSession } from '@/hooks/useSession';
 
 
-export default function UploadFiles({parentId}:string) {
+export default function UploadFiles({parentId}:FolderStructure) {
+  const {session} = useFetchSession();
   const [isFileVisible, setFileVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isFolderVisible, setFolderVisible] = useState(false);
   const [folderName, setFolderName] = useState("");
+
   const uploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    fileUpload(file, setProgress, parentId);
+    fileUpload(file, setProgress, parentId, session?.user.email);
   };
 
   const uploadFolder = (parentId:string) => {
@@ -22,6 +26,7 @@ export default function UploadFiles({parentId}:string) {
       isFolder:true,
       fileList:[],
       parentId:parentId || "",
+      userEmail:session?.user.email
     }
 
     addFolder(payload);

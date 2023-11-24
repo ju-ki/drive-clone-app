@@ -4,18 +4,15 @@ import { FetchFiles } from '@/hooks/fetchFiles';
 // import { FaFileAlt } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
 import { useRouter } from 'next/router';
+import type { FolderStructure } from '@/Interface';
+import { useFetchSession } from '@/hooks/useSession';
 
-export default function ShowFiles({parentId}:{parentId:string}) {
-    console.log("aaa");
+export default function ShowFiles({parentId}:FolderStructure) {
     
-    console.log(parentId);
-    
-    const {fileList} = FetchFiles(parentId);
-    console.log(fileList);
-    
+    const {session} = useFetchSession();
+    const {fileList} = FetchFiles(parentId, session?.user.email as string);
     const router = useRouter();
     const openFile = (fileLink:string) => {
-        console.log("aa");
         window.open(fileLink);
 
     }
