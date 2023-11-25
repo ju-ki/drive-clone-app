@@ -34,27 +34,33 @@ export default function UploadFiles({parentId}:FolderStructure) {
   }
 
   return (
-    <div className={styles.uploadMain}>
-      <Button onClick={() => {
-        setFolderVisible(false);
-        setFileVisible(!isFileVisible);
-        } }
-        title='Add a File' btnClass='btn-primary'
-      />
-      {isFileVisible ? (
-        <input onChange={(event) => uploadFile(event)} type='file' className='file-input w-full max-w-xs' />
-      ) :(
-        <></>
-      )}
-      <Button onClick={() => setFolderVisible(!isFolderVisible)} title='Create a Folder' btnClass='btn-primary btn-success'/>
-      {isFolderVisible ? (
-        <>
-          <input type="text" value={folderName} onChange={(event) => setFolderName(event.target.value)} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-          <Button onClick={() => uploadFolder(parentId)} title='Create' btnClass='btn-primary btn-success'/>
-        </>
+    <>
+      {session &&
+      <>
+        <div className={styles.uploadMain}>
+          <Button onClick={() => {
+            setFolderVisible(false);
+            setFileVisible(!isFileVisible);
+            } }
+            title='Add a File' btnClass='btn-primary'
+          />
+          {isFileVisible ? (
+            <input onChange={(event) => uploadFile(event)} type='file' className='file-input w-full max-w-xs' />
+          ) :(
+            <></>
+          )}
+          <Button onClick={() => setFolderVisible(!isFolderVisible)} title='Create a Folder' btnClass='btn-primary btn-success'/>
+          {isFolderVisible ? (
+            <>
+              <input type="text" value={folderName} onChange={(event) => setFolderName(event.target.value)} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+              <Button onClick={() => uploadFolder(parentId)} title='Create' btnClass='btn-primary btn-success'/>
+            </>
 
-      ) : <></>}
-      {progress === 0 || 100 ? <></> : <ProgressComp progress={progress} />}
-    </div>
+          ) : <></>}
+          {progress === 0 || 100 ? <></> : <ProgressComp progress={progress} />}
+        </div>
+      </>
+      }
+    </>
   )
 }

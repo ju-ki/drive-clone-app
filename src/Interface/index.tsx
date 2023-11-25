@@ -26,3 +26,9 @@ export interface FileType {
 export interface FolderStructure {
     parentId: string;
 }
+
+
+export interface GoogleAuth {
+    clientId:string;
+    clientSecret:string;
+}

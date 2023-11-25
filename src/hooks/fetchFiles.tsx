@@ -14,22 +14,21 @@ export const FetchFiles = (parentId: string, userEmail: string) => {
             const emailQuery = query(files, where("userEmail", "==",userEmail));
             if(!parentId)
             {
-                onSnapshot(emailQuery, (response) => {
-                    console.log("response");
+                onSnapshot(files, (response) => {
                     setFileList(response.docs.map((item) => {
                         return {...item.data(), id:item.id} as FileType
-                    }).filter((item: FileType) => item.parentId === "")
+                    }).filter((item: FileType) => item.parentId === "" && item.shareTo.includes(userEmail) || item.userEmail == userEmail)
                     );
                 });
             }
             else{
-                onSnapshot(emailQuery, (response) => {
+                onSnapshot(files, (response) => {
                     setFileList(
                         response.docs
                             .map((item) => {
                                 return {...item.data(), id:item.id} as FileType
                             })
-                            .filter((item: FileType) => item.parentId === parentId)
+                            .filter((item: FileType) => item.parentId === parentId && item.userEmail == userEmail)
                     )
                 })
             }
